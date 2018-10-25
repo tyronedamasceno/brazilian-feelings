@@ -44,11 +44,11 @@ import tweepy
 import numpy as np
 from textblob import TextBlob
 
-consumer_key='your_consumer_key'
-consumer_secret='consumer_secret'
+consumer_key='ck'
+consumer_secret='cs'
 
-access_token='access_token'
-access_token_secret='access_token_secret'
+access_token='at'
+access_token_secret='ats'
 
 """Agora, pra confirmar se deu tudo certo, façamos a autenticação na API do twitter"""
 
@@ -89,6 +89,118 @@ for tweet in tweets:
   if not is_english(text):
     text = TextBlob(str(text.translate(to='en')))
   
-  print('Tweet: ' + tweet.text)
-  print('Polarity: ' + str(text.sentiment.polarity) + " \ " + str(text.sentiment.subjectivity))
-  print('.....................')
+  #print('Tweet: ' + tweet.text)
+  #print('Polarity: ' + str(text.sentiment.polarity) + " \ " + str(text.sentiment.subjectivity))
+  #print('.....................')
+
+"""## Agora, um pouco de teoria
+
+Do nada um monte de dados que não sabemos de onde vem, né? Calma que vamos explicar tudo...
+
+**Polarity**:  Um valor entre -1.0 e 1.0, onde -1.0 se refere a uma polaridade 100% negativa, 1.0 uma polaridade 100% positiva e o 0 se refere a neutralidade
+
+**Subjectivity**: Um valor entre 0.0 e 1.0, onde 0.0 se refere a um valor 100% objetivo e 1.0 se refere a um valor 100%subjetivo
+
+Sentenças objetivas normalmente possuem fatos ou informaçãoes, enquanto sentenças subjetivas expressam sentimentos pessoais e opiniões
+
+## Voltando ao trabalho
+
+Agora que sabemos o que os dados significam, devemos ignorar valores com onde sua polaridade é neutra e são 100% objetivas, visto que se referem a fatos, e fatos não expressam sentimentos.
+
+Vamos juntar tudo que vimos dentro de uma função para ficar mais organizado
+"""
+
+def tweet_analysis():
+    polarities = []
+
+    for tweet in tweets:
+        text = TextBlob(tweet.text)
+
+        if not is_english(text):
+            text = TextBlob(str(text.translate(to='en')))
+            
+        if (text.sentiment.polarity != 0.0 and text.sentiment.subjectivity != 0.0):
+            polarities.append(text.sentiment.polarity)
+
+        #print('Tweet: ' + tweet.text)
+        #print('Polarity: ' + str(text.sentiment.polarity) + " \ " + str(text.sentiment.subjectivity))
+        #print('.....................')
+        
+    
+    return polarities
+
+"""E usaremos o **NumPy** para calcular a média das polaridades"""
+
+polarity_mean = np.mean(tweet_analysis())
+
+print('Média: ' + str(polarity_mean))
+if(polarity_mean > 0.0):
+    print('POSITIVE')
+else:
+    print('NEGATIVE')
+
+"""## Êba, pronto??? Ainda não
+
+De fato criamos um analisador de tweets, mas esse projeto vai muito além disso.
+
+Vamos alterar a forma de busca dos tweets para que possamos determinar o número de tweets recuperados e que esses sejam os mais recentes
+"""
+
+tweets = tweepy.Cursor(api.search, q="Python Brasil -filter:retweets", result_type="recent").items(20)
+
+"""## Modificando um pouco as coisas
+
+Agora, faremos uma mudança na nossa função `tweet_analysis()` para que essa retorne um dicionário com as polaridades e subjetividades de cada tweet, bem como ela que receba o termo a ser passado como query e o numero de tweets a serem procurados.
+"""
+
+def tweet_analysis(query, items=20):
+    
+    tweets = tweepy.Cursor(api.search, wait_on_rate_limit=True, q=query + " -filter:retweets", result_type="recent").items(items)
+    polarities = []
+    subjectivities = []
+    
+    for tweet in tweets:
+        text = TextBlob(tweet.text)
+        #if not is_english(text):
+        #    text = TextBlob(str(text.translate(to='en')))
+            
+        
+        if (text.sentiment.polarity != 0.0 and text.sentiment.subjectivity != 0.0):
+            polarities.append(text.sentiment.polarity)
+            subjectivities.append(text.sentiment.subjectivity)
+        
+    
+    return {'polarity': polarities, 'subjectivity':subjectivities}
+
+"""Vamos também criar uma função que pega a média ponderada dos tweets a partir da sua subjetividade e outra para imprimir os resultados"""
+
+def get_weighted_polarity_mean(valid_tweets):
+    return np.average(valid_tweets['polarity'],weights=valid_tweets['subjectivity'])
+
+def get_polarity_mean(valid_tweets):
+    return np.mean(valid_tweets['polarity'])
+  
+def print_result(mean):
+    if mean > 0.0:
+        print('POSITIVE')
+    elif mean == 0.0:
+        print('NEUTRO')
+    else:
+        print('NEGATIVE')
+
+"""## Finalizando a análise
+
+Vamos criar uma função principal que centraliza a análise:
+"""
+
+def do_analysis():
+  query = input("Entre a query de analise: ")
+  analysis = tweet_analysis(query)
+
+  print('MÉDIA PONDERADA: ' + str(get_weighted_polarity_mean(analysis)))
+  print_result(get_weighted_polarity_mean(analysis))
+
+  print('MÉDIA: ' + str(get_polarity_mean(analysis)))
+  print_result(get_polarity_mean(analysis))
+
+do_analysis()
