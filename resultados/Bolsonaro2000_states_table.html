@@ -1,0 +1,240 @@
+<html><head><meta charset="UTF-8">
+<script>
+  // Avoid => literals to stay ES6 compatible for the sake of googlebot.
+  window.addEventListener('message', function(message)  {
+    if (message.source != window.parent) {
+      return;
+    }
+    if (message.data.sandboxed_iframe_evaluation) {
+      // Message is available in scope so evaluated script can get params from
+      // it.
+      window.currentMessage = message;
+      eval.call(null, message.data.sandboxed_iframe_evaluation);
+      delete window.currentMessage;
+    }
+  });
+</script>
+<base href="https://localhost:8080/"><link rel="stylesheet" href="https://colab.research.google.com/v2/external/css/outputframe.css?vrz=colab-20181025-085300-RC01_218695419"></head><body><div id="output-area"><span id="output-header"> </span><div id="output-body"><div class="display_data output-id-1"><div class="output_subarea output_html rendered_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table class="dataframe" border="1">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>max</th>
+      <th>mean</th>
+      <th>min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Acre</th>
+      <td>5</td>
+      <td>0.8</td>
+      <td>0.1675</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Alagoas</th>
+      <td>7</td>
+      <td>0.5875</td>
+      <td>0.0400974</td>
+      <td>-0.5</td>
+    </tr>
+    <tr>
+      <th>Amapá</th>
+      <td>2</td>
+      <td>0.7</td>
+      <td>0.25</td>
+      <td>-0.2</td>
+    </tr>
+    <tr>
+      <th>Amazonas</th>
+      <td>15</td>
+      <td>0.8</td>
+      <td>0.186558</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Bahia</th>
+      <td>20</td>
+      <td>1</td>
+      <td>0.102798</td>
+      <td>-0.4</td>
+    </tr>
+    <tr>
+      <th>Ceará</th>
+      <td>20</td>
+      <td>0.8</td>
+      <td>0.0999621</td>
+      <td>-0.6</td>
+    </tr>
+    <tr>
+      <th>Distrito Federal</th>
+      <td>34</td>
+      <td>0.5</td>
+      <td>0.0621771</td>
+      <td>-0.3125</td>
+    </tr>
+    <tr>
+      <th>Espírito Santo</th>
+      <td>33</td>
+      <td>0.5</td>
+      <td>0.0315242</td>
+      <td>-0.66276</td>
+    </tr>
+    <tr>
+      <th>Exterior</th>
+      <td>939</td>
+      <td>1</td>
+      <td>0.056617</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Goiás</th>
+      <td>34</td>
+      <td>0.8</td>
+      <td>-0.00672852</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Maranhão</th>
+      <td>10</td>
+      <td>0.5</td>
+      <td>0.0230114</td>
+      <td>-0.25</td>
+    </tr>
+    <tr>
+      <th>Mato Grosso</th>
+      <td>96</td>
+      <td>1</td>
+      <td>0.0254142</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Mato Grosso do Sul</th>
+      <td>5</td>
+      <td>0.0222222</td>
+      <td>-0.0955556</td>
+      <td>-0.5</td>
+    </tr>
+    <tr>
+      <th>Minas Gerais</th>
+      <td>128</td>
+      <td>0.8</td>
+      <td>0.0369227</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Paraná</th>
+      <td>69</td>
+      <td>1</td>
+      <td>0.0615829</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Paraíba</th>
+      <td>10</td>
+      <td>0.25</td>
+      <td>0.0125</td>
+      <td>-0.125</td>
+    </tr>
+    <tr>
+      <th>Pará</th>
+      <td>18</td>
+      <td>0.8</td>
+      <td>0.0641655</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Pernambuco</th>
+      <td>41</td>
+      <td>0.8</td>
+      <td>0.11005</td>
+      <td>-0.4</td>
+    </tr>
+    <tr>
+      <th>Piauí</th>
+      <td>6</td>
+      <td>1</td>
+      <td>0.250397</td>
+      <td>-0.0833333</td>
+    </tr>
+    <tr>
+      <th>Rio Grande do Norte</th>
+      <td>16</td>
+      <td>0.8</td>
+      <td>0.141667</td>
+      <td>-0.4</td>
+    </tr>
+    <tr>
+      <th>Rio Grande do Sul</th>
+      <td>125</td>
+      <td>1</td>
+      <td>0.00418082</td>
+      <td>-0.9</td>
+    </tr>
+    <tr>
+      <th>Rio de Janeiro</th>
+      <td>282</td>
+      <td>1</td>
+      <td>0.0222982</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Rondônia</th>
+      <td>11</td>
+      <td>0.5</td>
+      <td>5.04647e-18</td>
+      <td>-0.6</td>
+    </tr>
+    <tr>
+      <th>Roraima</th>
+      <td>6</td>
+      <td>0.342857</td>
+      <td>0.0446429</td>
+      <td>-0.1</td>
+    </tr>
+    <tr>
+      <th>Santa Catarina</th>
+      <td>56</td>
+      <td>1</td>
+      <td>0.0357175</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Sergipe</th>
+      <td>3</td>
+      <td>0</td>
+      <td>-0.00333333</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <th>São Paulo</th>
+      <td>218</td>
+      <td>1</td>
+      <td>0.0555679</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>Tocantins</th>
+      <td>5</td>
+      <td>1</td>
+      <td>0.307273</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div><span id="output-footer"></span></div></body></html>
