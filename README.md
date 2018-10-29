@@ -15,8 +15,8 @@ Os notebooks usados na execução do projeto são [Tweets Crawler](src/tweet_cra
 
 ## Referências
 
-https://github.com/betinacosta/handson-sentiment-analysis
-http://www.tweepy.org/
-https://textblob.readthedocs.io/en/dev/
-https://github.com/python-visualization/folium
-https://pypi.org/project/Shapely/
+- https://github.com/betinacosta/handson-sentiment-analysis
+- http://www.tweepy.org/
+- https://textblob.readthedocs.io/en/dev/
+- https://github.com/python-visualization/folium
+- https://pypi.org/project/Shapely/
