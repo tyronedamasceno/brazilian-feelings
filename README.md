@@ -1,9 +1,9 @@
 # Brazilian Feelings
 
-Esta é uma aplicação de análise de sentimentos a partir de dados obtidos em posts do Twitter de a partir de algumas palavras chaves. 
+Esta é uma aplicação de análise de sentimentos a partir de dados obtidos em posts do Twitter a partir de algumas palavras chaves. 
 No nosso exemplo padrão utilizamos como palavras chave *Bolsonaro* e *Haddad*.
 
-Além disso, a aplicação possibilita você ver uma variação no nível de sentimento dos tweets por região.
+Além disso, a aplicação possibilita você ver uma variação no nível de sentimento dos tweets por estado do brasil, observar densidade de tweets em cada região no mundo e exibir pontos exatos de cada tweet e sua análise de sentimento individual.
 
 Os notebooks usados na execução do projeto são [Tweets Crawler](src/tweet_crawler.ipynb) e [Map Plotting](src/plotagem_do_mapa.ipynb).
 
