@@ -12,3 +12,11 @@ Os notebooks usados na execução do projeto são [Tweets Crawler](src/tweet_cra
 - Hugo Oliveira [HugoTHO](https://github.com/HugoTHO)  - Limpeza dos dados e plotagem dos mapas
 - Paulo Queiroz [lopespaulo](https://github.com/lopespaulo) - Coleta e processamento de dados
 - Tyrone Damasceno [tyronedamasceno](https://github.com/tyronedamasceno) - Idealizador, pesquisa e documentação
+
+## Referências
+
+https://github.com/betinacosta/handson-sentiment-analysis
+http://www.tweepy.org/
+https://textblob.readthedocs.io/en/dev/
+https://github.com/python-visualization/folium
+https://pypi.org/project/Shapely/
